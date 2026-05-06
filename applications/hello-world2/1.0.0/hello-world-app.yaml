@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world2
+  namespace: ldppoc-test-tntkn
+  labels:
+    app: hello-world2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-world2
+  template:
+    metadata:
+      labels:
+        app: hello-world2
+    spec:
+      containers:
+      - name: web
+        image: paulbouwer/hello-kubernetes:1.10
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MESSAGE
+          value: "Hallo aus der Nutanix NKP Testumgebung!"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-service
+  namespace: ldppoc-test-tntkn
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: hello-world2

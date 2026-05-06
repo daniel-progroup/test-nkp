@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ApplicationMetadata
+metadata:
+  name: hello-world2
+  version: 1.0.0
+spec:
+  displayName: "Hello World Webapp"
+  description: "A friendly Hello World test application running on Nutanix NKP."
+  categories:
+    - Testing
+    - Utilities
