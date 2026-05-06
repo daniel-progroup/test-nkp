@@ -1,0 +1,26 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: test-repo
+  namespace: ldppoc-test-tntkn
+spec:
+  interval: 1m
+  url: https://github.com/daniel-progroup/test-nkp.git
+  secretRef:
+    name: github-repo-creds
+  ref:
+    branch: main
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: hello-world-app
+  namespace: ldppoc-test-tntkn
+spec:
+  interval: 2m
+  path: ./apps/hello-world
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: test-repo
+  targetNamespace: ldppoc-test-tntkn

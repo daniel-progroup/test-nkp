@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-service
+spec:
+  type: ClusterIP # Oder 'LoadBalancer', falls NKP in deiner Umgebung externe IPs vergibt
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: hello-world
